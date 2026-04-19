@@ -113,27 +113,43 @@ const WorkerDashboard = () => {
       }
 
       // Fetch worker profile
-      const workerResponse = await getWorkerProfile(token);
-      if (workerResponse.status === 'ok') {
-        setWorkerProfile(workerResponse.worker);
+      try {
+        const workerResponse = await getWorkerProfile(token);
+        if (workerResponse.status === 'ok') {
+          setWorkerProfile(workerResponse.worker);
+        }
+      } catch (err) {
+        console.warn('Profile not found', err);
       }
 
       // Fetch worker bookings
-      const bookingsResponse = await getWorkerBookings(token);
-      if (bookingsResponse.status === 'ok') {
-        setBookings(bookingsResponse.data || []);
+      try {
+        const bookingsResponse = await getWorkerBookings(token);
+        if (bookingsResponse.status === 'ok') {
+          setBookings(bookingsResponse.data || []);
+        }
+      } catch (err) {
+        console.warn('Bookings fetch failed', err);
       }
 
       // Fetch worker reviews
-      const reviewsResponse = await getWorkerReviews(token);
-      if (reviewsResponse.status === 'ok') {
-        setReviews(reviewsResponse.data || []);
+      try {
+        const reviewsResponse = await getWorkerReviews(token);
+        if (reviewsResponse.status === 'ok') {
+          setReviews(reviewsResponse.data || []);
+        }
+      } catch (err) {
+        console.warn('Reviews fetch failed', err);
       }
 
-      const scheduleResponse = await getWorkerSchedule(token);
-      if (scheduleResponse.status === 'ok') {
-        setSchedule(scheduleResponse.data.schedule || []);
-        setBlockedDates(scheduleResponse.data.blockedDates || []);
+      try {
+        const scheduleResponse = await getWorkerSchedule(token);
+        if (scheduleResponse.status === 'ok') {
+          setSchedule(scheduleResponse.data.schedule || []);
+          setBlockedDates(scheduleResponse.data.blockedDates || []);
+        }
+      } catch (err) {
+        console.warn('Schedule fetch failed', err);
       }
 
     } catch (error) {

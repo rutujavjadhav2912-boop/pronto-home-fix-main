@@ -376,6 +376,13 @@ const AdminDashboard = () => {
                             </Button>
                           </div>
                         )}
+                        {(booking.status === "accepted" || booking.status === "in_progress") && (
+                          <div className="flex gap-2 pt-2">
+                            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => updateBookingState(Number(booking.id), "completed")}>
+                              <CheckCircle className="mr-2 h-4 w-4" /> Mark Completed
+                            </Button>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   ))}
@@ -445,6 +452,13 @@ const AdminDashboard = () => {
                         </Button>
                         <Button size="sm" variant="destructive" onClick={() => updateBookingState(Number(booking.id), "cancelled")}>
                           <XCircle className="mr-2 h-4 w-4" /> Cancel
+                        </Button>
+                      </div>
+                    )}
+                    {(booking.status === "accepted" || booking.status === "in_progress") && (
+                      <div className="flex gap-2 pt-2">
+                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => updateBookingState(Number(booking.id), "completed")}>
+                          <CheckCircle className="mr-2 h-4 w-4" /> Mark Completed
                         </Button>
                       </div>
                     )}
